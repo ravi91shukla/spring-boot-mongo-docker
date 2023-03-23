@@ -32,7 +32,7 @@ COPY . /app
 WORKDIR /app
 
 # Compile your Java application
-RUN javac Main.java
+RUN javac DemoApp.java
 
 # Expose the application port
 EXPOSE 8080
