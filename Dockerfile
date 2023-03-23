@@ -30,4 +30,4 @@ COPY . /app
 
 # Set the working directory to the application directory
 WORKDIR /app
-ENTRYPOINT ["java" ,"-jar","./spring-boot-mongo.jar"]
+CMD ["java" ,"-jar","./spring-boot-mongo.jar"]
