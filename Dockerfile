@@ -30,4 +30,12 @@ COPY . /app
 
 # Set the working directory to the application directory
 WORKDIR /app
+# Compile your Java application
+RUN javac DemoApp.java
+
+# Expose the application port
+EXPOSE 8080
+
+# Start the application
+CMD ["java", "DemoApp"]
 CMD ["java" ,"-jar","./spring-boot-mongo.jar"]
