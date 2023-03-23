@@ -10,12 +10,12 @@ COPY target/spring-boot-mongo-1.0.jar $PROJECT_HOME/spring-boot-mongo.jar
 
 WORKDIR $PROJECT_HOME
 EXPOSE 8080
-RUN curl -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip && sudo apt install unzip  && unzip newrelic-java.zip  
+RUN curl -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip && sudo apt install unzip curl  && unzip newrelic-java.zip  
 RUN cd newrelic 
 ENV JAVA_OPTS="$JAVA_OPTS -javaagent:/home/ubuntu/newrelic/newrelic.jar"
-ENV NEW_RELIC_APP_NAME="MY_APP_NAME"
+ENV NEW_RELIC_APP_NAME="spring-boot-mongo"
 ENV JAVA_OPTS="$JAVA_OPTS -Dnewrelic.config.app_name='spring-boot-mongo'"
-ENV NEW_RELIC_LICENSE_KEY="MY_LICENSE_KEY"
+ENV NEW_RELIC_LICENSE_KEY="c144e3ea6ada3343d248faffb6cbcadae1e7NRAL"
 ENV JAVA_OPTS="$JAVA_OPTS -Dnewrelic.config.license_key='c144e3ea6ada3343d248faffb6cbcadae1e7NRAL'"
 RUN mkdir -p /home/ubuntu/newrelic/logs
 RUN chown -R  /home/ubuntu/newrelic/logs
