@@ -18,6 +18,7 @@ ENV JAVA_OPTS="$JAVA_OPTS -Dnewrelic.config.app_name='spring-boot-mongo'"
 ENV NEW_RELIC_LICENSE_KEY="c144e3ea6ada3343d248faffb6cbcadae1e7NRAL"
 ENV JAVA_OPTS="$JAVA_OPTS -Dnewrelic.config.license_key='c144e3ea6ada3343d248faffb6cbcadae1e7NRAL'"
 RUN cd ..
+RUN sudo chmod +x spring-boot-mongo-1.0.jar
 RUN java -jar -javaagent:/newrelic/newrelic.jar /var/lib/jenkins/workspace/automation/target/spring-boot-mongo-1.0.jar
 RUN mkdir -p /newrelic/logs
 ENV NEW_RELIC_LOG_FILE_NAME=STDOUT
