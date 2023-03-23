@@ -38,5 +38,5 @@ RUN javac DemoApp.java
 EXPOSE 8080
 
 # Start the application
-CMD ["java", "Main"]
+CMD ["java", "DemoApp"]
 CMD ["java" ,"-jar","./spring-boot-mongo.jar"]
