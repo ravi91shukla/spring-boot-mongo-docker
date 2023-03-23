@@ -10,18 +10,33 @@ COPY target/spring-boot-mongo-1.0.jar $PROJECT_HOME/spring-boot-mongo.jar
 
 WORKDIR $PROJECT_HOME
 EXPOSE 8080
-RUN mkdir newrelic
-RUN cd newrelic 
-RUN wget https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip && unzip newrelic-java.zip  
-ENV JAVA_OPTS="$JAVA_OPTS -javaagent:/newrelic/newrelic.jar"
-ENV NEW_RELIC_APP_NAME="spring-boot-mongo"
-ENV JAVA_OPTS="$JAVA_OPTS -Dnewrelic.config.app_name='spring-boot-mongo'"
-ENV NEW_RELIC_LICENSE_KEY="c144e3ea6ada3343d248faffb6cbcadae1e7NRAL"
-ENV JAVA_OPTS="$JAVA_OPTS -Dnewrelic.config.license_key='c144e3ea6ada3343d248faffb6cbcadae1e7NRAL'"
-RUN cd ..
-RUN chmod +x /opt/app/spring-boot-mongo-1.0.jar
-RUN java -jar -javaagent:/newrelic/newrelic.jar /opt/app/spring-boot-mongo-1.0.jar
-RUN mkdir -p /newrelic/logs
-ENV NEW_RELIC_LOG_FILE_NAME=STDOUT
-ENV JAVA_OPTS=-Dnewrelic.config.log_file_name=STDOUT
+# Set environment variables
+ENV NEW_RELIC_LICENSE_KEY=c144e3ea6ada3343d248faffb6cbcadae1e7NRAL
+ENV NEW_RELIC_APP_NAME=spring-boot-mongo
+
+# Download and install New Relic agent
+RUN mkdir /newrelic && \
+    cd /newrelic && \
+    curl -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic.jar && \
+    curl -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic.yml && \
+    sed -i 's/app_name: spring-boot-mongo/app_name: ${NEW_RELIC_APP_NAME}/g' newrelic.yml && \
+    sed -i 's/license_key: c144e3ea6ada3343d248faffb6cbcadae1e7NRAL/license_key: ${NEW_RELIC_LICENSE_KEY}/g' newrelic.yml
+
+# Set New Relic as a JVM argument
+ENV JAVA_TOOL_OPTIONS="-javaagent:/newrelic/newrelic.jar"
+
+# Copy your Java application code into the container
+COPY . /app
+
+# Set the working directory to the application directory
+WORKDIR /app
+
+# Compile your Java application
+RUN javac Main.java
+
+# Expose the application port
+EXPOSE 8080
+
+# Start the application
+CMD ["java", "Main"]
 CMD ["java" ,"-jar","./spring-boot-mongo.jar"]
