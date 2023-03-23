@@ -10,8 +10,9 @@ COPY target/spring-boot-mongo-1.0.jar $PROJECT_HOME/spring-boot-mongo.jar
 
 WORKDIR $PROJECT_HOME
 EXPOSE 8080
-RUN wget https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip && unzip newrelic-java.zip  
+RUN mkdir newrelic
 RUN cd newrelic 
+RUN wget https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip && unzip newrelic-java.zip  
 ENV JAVA_OPTS="$JAVA_OPTS -javaagent:/newrelic/newrelic.jar"
 ENV NEW_RELIC_APP_NAME="spring-boot-mongo"
 ENV JAVA_OPTS="$JAVA_OPTS -Dnewrelic.config.app_name='spring-boot-mongo'"
