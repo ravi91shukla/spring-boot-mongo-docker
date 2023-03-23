@@ -32,11 +32,11 @@ COPY . /app
 WORKDIR /app
 
 # Compile your Java application
-RUN javac DemoApp.java
+RUN javac pom.xml
 
 # Expose the application port
 EXPOSE 8080
 
 # Start the application
-CMD ["java", "DemoApp"]
+CMD ["java", "pom"]
 CMD ["java" ,"-jar","./spring-boot-mongo.jar"]
