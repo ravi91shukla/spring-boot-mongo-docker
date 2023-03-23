@@ -17,8 +17,8 @@ ENV NEW_RELIC_APP_NAME=spring-boot-mongo
 # Download and install New Relic agent
 RUN mkdir /newrelic && \
     cd /newrelic && \
-    curl -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic.jar && \
-    curl -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic.yml && \
+    wget https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic.jar && \
+    wget https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic.yml && \
     sed -i 's/app_name: spring-boot-mongo/app_name: ${NEW_RELIC_APP_NAME}/g' newrelic.yml && \
     sed -i 's/license_key: c144e3ea6ada3343d248faffb6cbcadae1e7NRAL/license_key: ${NEW_RELIC_LICENSE_KEY}/g' newrelic.yml
 
