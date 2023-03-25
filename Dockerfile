@@ -1,7 +1,7 @@
 FROM openjdk:8-alpine
 
 # Required for starting application up.
-RUN apk update && apk add /bin/sh && apt-get install unzip
+#RUN apk update && apk add /bin/sh && yum -y install unzip
 
 
 RUN mkdir -p /opt/app
