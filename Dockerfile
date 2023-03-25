@@ -7,7 +7,7 @@ FROM openjdk:8-alpine
 RUN mkdir -p /opt/app
 ENV PROJECT_HOME /opt/app
 RUN wget https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip && unzip newrelic-java.zip
-COPY newrelic /opt/app/newrelic
+ADD newrelic /opt/app/newrelic
 
 ENV NEW_RELIC_APP_NAME="New_Relic_Demo"
 ENV NEW_RELIC_LICENSE_KEY="c144e3ea6ada3343d248faffb6cbcadae1e7NRAL"
