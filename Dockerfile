@@ -6,7 +6,7 @@ FROM openjdk:8-alpine
 
 RUN mkdir -p /opt/app
 ENV PROJECT_HOME /opt/app
-RUN wget https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-KHSC73ZQ3DXSJA5W8TZREHFDMEV NEW_RELIC_ACCOUNT_ID=3789883 /usr/local/bin/newrelic install -n java-agent-installer
+#RUN wget https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-KHSC73ZQ3DXSJA5W8TZREHFDMEV NEW_RELIC_ACCOUNT_ID=3789883 /usr/local/bin/newrelic install -n java-agent-installer
 #RUN wget https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip && unzip newrelic-java.zip
 #RUN cp -R newrelic /opt/app/newrelic
 
@@ -18,6 +18,6 @@ COPY target/spring-boot-mongo-1.0.jar $PROJECT_HOME/spring-boot-mongo.jar
 
 WORKDIR $PROJECT_HOME
 EXPOSE 8080
-#ENTRYPOINT ["java","-javaagent:/opt/app/newrelic/newrelic.jar","-jar","/opt/app/spring-boot-mongo.jar"]
-CMD ["java" ,"-jar","./spring-boot-mongo.jar"]
+ENTRYPOINT ["java","-javaagent:/opt/app/newrelic/newrelic.jar","-jar","/opt/app/spring-boot-mongo.jar"]
+#CMD ["java" ,"-jar","./spring-boot-mongo.jar"]
 
