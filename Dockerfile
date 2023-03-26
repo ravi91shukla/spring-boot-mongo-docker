@@ -9,7 +9,7 @@ ENV PROJECT_HOME /opt/app
 RUN wget https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip && unzip newrelic-java.zip
 RUN cp -R newrelic /opt/app/newrelic
 
-ENV NEW_RELIC_APP_NAME="springboot-mango"
+ENV NEW_RELIC_APP_NAME="spring-boot-mongo"
 ENV NEW_RELIC_LICENSE_KEY="c144e3ea6ada3343d248faffb6cbcadae1e7NRAL"
 ENV NEW_RELIC_LOG_FILE_NAME="STDOUT"
 
